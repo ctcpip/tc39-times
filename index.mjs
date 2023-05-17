@@ -56,9 +56,9 @@ for (let i = 0; i < days; i++) {
         pmText.push(formatSpan(zoneSpans.pm))
     }
 
-    timeRow.push(amText.join("\n"), pmText.join("\n"))
+    timeRow.push(current.toPlainDate().toString(), amText.join("\n"), pmText.join("\n"))
 
     current = current.add({ days: 1 })
 }
 
-console.log(timeRow.map((cell) => `"${cell}"`).join(","))
+console.log(timeRow.join("\n\n"))
