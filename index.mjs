@@ -1,9 +1,12 @@
 import { Temporal, Intl } from "@js-temporal/polyfill"
 
-// CONFIGURATION, UPDATE AS NEEDED
 const startTime = Temporal.PlainTime.from("10:00")
-const startDate = Temporal.PlainDate.from("2023-01-30")
-const timeZone = Temporal.TimeZone.from("America/New_York")
+const inputDate = process.argv[2]
+if (inputDate === undefined) throw Error("must provide a start date")
+const inputTz = process.argv[3]
+if (inputTz === undefined) throw Error("must provide a meeting timezone")
+const startDate = Temporal.PlainDate.from(inputDate)
+const timeZone = Temporal.TimeZone.from(inputTz)
 const days = 4
 
 const showTimeZones = [
@@ -13,7 +16,6 @@ const showTimeZones = [
     "Europe/Madrid",
 ]
 
-// CODE
 const startFormatter = Intl.DateTimeFormat("en-US", {
     hour: "numeric",
     minute: "2-digit",
@@ -56,7 +58,11 @@ for (let i = 0; i < days; i++) {
         pmText.push(formatSpan(zoneSpans.pm))
     }
 
-    timeRow.push(current.toPlainDate().toString(), amText.join("\n"), pmText.join("\n"))
+    timeRow.push(
+        current.toPlainDate().toString(),
+        amText.join("\n"),
+        pmText.join("\n")
+    )
 
     current = current.add({ days: 1 })
 }
