@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Temporal, Intl } from "@js-temporal/polyfill"
 
 const startTime = Temporal.PlainTime.from("10:00")
