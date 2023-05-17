@@ -25,10 +25,10 @@ const endFormatter = Intl.DateTimeFormat("en-US", {
     timeZoneName: "short",
 })
 
-const baseTime = Temporal.Now.zonedDateTimeISO()
-    .withTimeZone(timeZone)
-    .withPlainDate(startDate)
-    .withPlainTime(startTime)
+const baseTime = startDate.toZonedDateTime({
+    timeZone: timeZone,
+    plainTime: startTime,
+})
 
 function spans(time, tz) {
     time = time.withTimeZone(Temporal.TimeZone.from(tz))
