@@ -34,7 +34,7 @@ function spans(time, tz) {
     time = time.withTimeZone(Temporal.TimeZone.from(tz))
     return {
         am: [time, time.add({ hours: 2 })],
-        pm: [time.add({ hours: 3 }), time.add({ hours: 6 })],
+        pm: [time.add({ hours: 3 }), time.add({ hours: 5 })],
     }
 }
 
