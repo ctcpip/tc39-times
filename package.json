@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": "./index.mjs",
   "repository": {
     "type": "git",
     "url": "git@git.disroot.org:ryzokuken/tc39-times.git"
@@ -14,6 +13,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@js-temporal/polyfill": "^0.4.3"
+    "@js-temporal/polyfill": "^0.4.4"
   }
 }

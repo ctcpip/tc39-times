@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Temporal, Intl } from "@js-temporal/polyfill"
+import { Temporal } from "@js-temporal/polyfill"
 
 const startTime = Temporal.PlainTime.from("10:00")
 const inputDate = process.argv[2]
@@ -18,16 +18,10 @@ const showTimeZones = [
     "Europe/Madrid",
 ]
 
-const startFormatter = Intl.DateTimeFormat("en-US", {
+const formatOptions = {
     hour: "numeric",
     minute: "2-digit",
-})
-
-const endFormatter = Intl.DateTimeFormat("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    timeZoneName: "short",
-})
+}
 
 const baseTime = startDate.toZonedDateTime({
     timeZone: timeZone,
@@ -43,9 +37,13 @@ function spans(time, tz) {
 }
 
 function formatSpan(span) {
-    return `${startFormatter.format(span[0])} to ${endFormatter.format(
-        span[1]
-    )}`
+    return `${span[0].toLocaleString(
+        "en-US",
+        formatOptions
+    )} to ${span[1].toLocaleString("en-US", {
+        ...formatOptions,
+        timeZoneName: "short",
+    })}`
 }
 
 let current = baseTime
