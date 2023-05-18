@@ -12,10 +12,11 @@ const timeZone = Temporal.TimeZone.from(inputTz)
 const days = 4
 
 const showTimeZones = [
-    "America/Los_Angeles",
-    "America/Chicago",
-    "Europe/London",
-    "Europe/Madrid",
+    // CLDR abbreviations are locale specific so we need to provide different locales for the desired short TZ names
+    ["America/Los_Angeles", "en-US"],
+    ["America/Chicago", "en-US"],
+    ["Europe/London", "en-GB"],
+    ["Europe/Madrid", "en-GB"],
 ]
 
 const formatOptions = {
@@ -36,11 +37,12 @@ function spans(time, tz) {
     }
 }
 
-function formatSpan(span) {
+function formatSpan(span, locale) {
+
     return `${span[0].toLocaleString(
-        "en-US",
+        locale,
         formatOptions
-    )} to ${span[1].toLocaleString("en-US", {
+    )} to ${span[1].toLocaleString(locale, {
         ...formatOptions,
         timeZoneName: "short",
     })}`
@@ -53,9 +55,10 @@ for (let i = 0; i < days; i++) {
     let pmText = []
 
     for (const zone of showTimeZones) {
-        const zoneSpans = spans(current, zone)
-        amText.push(formatSpan(zoneSpans.am))
-        pmText.push(formatSpan(zoneSpans.pm))
+        const [z,l] = zone
+        const zoneSpans = spans(current, z)
+        amText.push(formatSpan(zoneSpans.am, l))
+        pmText.push(formatSpan(zoneSpans.pm, l))
     }
 
     timeRow.push(
