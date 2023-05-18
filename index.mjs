@@ -16,7 +16,7 @@ const showTimeZones = [
     ["America/Los_Angeles", "en-US"],
     ["America/Chicago", "en-US"],
     ["Europe/London", "en-GB"],
-    ["Europe/Madrid", "en-GB"],
+    ["Europe/Madrid", "es-ES"],
 ]
 
 const formatOptions = {
