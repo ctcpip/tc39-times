@@ -2,6 +2,16 @@
 
 ## Usage
 
+You can run the tool on any computer with `npm` installed by running the following command
+
+```sh
+npx git+https://git.disroot.org/ryzokuken/tc39-times.git <date> <timezone>
+```
+
+### Local Usage
+
+If you have a local checkout of the script on your computer, you can run it by executing the following in the project directory
+
 ```sh
 node index.mjs <date> <timezone>
 ```
