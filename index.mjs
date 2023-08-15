@@ -20,7 +20,8 @@ const showTimeZones = [
 ]
 
 const formatOptions = {
-    hour: "numeric",
+    hour: "2-digit",
+    hour12: false,
     minute: "2-digit",
 }
 
@@ -42,7 +43,7 @@ function formatSpan(span, locale) {
     return `${span[0].toLocaleString(
         locale,
         formatOptions
-    )} to ${span[1].toLocaleString(locale, {
+    )}-${span[1].toLocaleString(locale, {
         ...formatOptions,
         timeZoneName: "short",
     })}`
