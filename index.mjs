@@ -34,7 +34,8 @@ function spans(time, tz) {
     time = time.withTimeZone(Temporal.TimeZone.from(tz))
     return {
         am: [time, time.add({ hours: 2 })],
-        pm: [time.add({ hours: 3 }), time.add({ hours: 5 })],
+        pm1: [time.add({ hours: 3 }), time.add({ hours: 5 })],
+        pm2: [time.add({ hours: 5 }), time.add({ hours: 7 })],
     }
 }
 
@@ -53,19 +54,22 @@ let current = baseTime
 const timeRow = []
 for (let i = 0; i < days; i++) {
     let amText = []
-    let pmText = []
+    let pm1Text = []
+    let pm2Text = []
 
     for (const zone of showTimeZones) {
         const [z,l] = zone
         const zoneSpans = spans(current, z)
         amText.push(formatSpan(zoneSpans.am, l))
-        pmText.push(formatSpan(zoneSpans.pm, l))
+        pm1Text.push(formatSpan(zoneSpans.pm1, l))
+        pm2Text.push(formatSpan(zoneSpans.pm2, l))
     }
 
     timeRow.push(
         current.toPlainDate().toString(),
         amText.join("\n"),
-        pmText.join("\n")
+        pm1Text.join("\n"),
+        pm2Text.join("\n")
     )
 
     current = current.add({ days: 1 })
