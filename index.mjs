@@ -22,6 +22,7 @@ const showTimeZones = [
 const formatOptions = {
     hour: "2-digit",
     hour12: false,
+    hourCycle: 'h23',
     minute: "2-digit",
 }
 
