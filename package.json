@@ -1,19 +1,18 @@
 {
   "name": "tc39-times",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
   "main": "index.mjs",
   "bin": "./index.mjs",
   "scripts": {
+    "times": "node index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git@git.disroot.org:ryzokuken/tc39-times.git"
   },
-  "author": "",
   "license": "MIT",
   "dependencies": {
-    "@js-temporal/polyfill": "^0.4.4"
+    "@js-temporal/polyfill": "^0.5.1"
   }
 }
