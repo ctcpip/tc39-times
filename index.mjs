@@ -5,12 +5,11 @@ import { Temporal } from "@js-temporal/polyfill"
 const startTime = Temporal.PlainTime.from("10:00")
 const inputDate = process.argv[2]
 if (typeof inputDate === 'undefined') throw Error("must provide a start date")
-const inputTz = process.argv[3]
-if (typeof inputTz === 'undefined') throw Error("must provide a meeting timezone")
+const timeZone = process.argv[3]
+if (typeof timeZone === 'undefined') throw Error("must provide a meeting timezone")
 const inputMeetingType = process.argv[4]
 if (typeof inputMeetingType === 'undefined') throw Error("must provide a meeting type")
 const startDate = Temporal.PlainDate.from(inputDate)
-const timeZone = Temporal.TimeZone.from(inputTz)
 let days;
 let isHybridMeeting = false;
 
@@ -47,7 +46,7 @@ const baseTime = startDate.toZonedDateTime({
 })
 
 function spans(time, tz) {
-    time = time.withTimeZone(Temporal.TimeZone.from(tz))
+    time = time.withTimeZone(tz)
 
     return {
         am: [time, time.add({ hours: 2 })],
