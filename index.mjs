@@ -4,12 +4,27 @@ import { Temporal } from "@js-temporal/polyfill"
 
 const startTime = Temporal.PlainTime.from("10:00")
 const inputDate = process.argv[2]
-if (inputDate === undefined) throw Error("must provide a start date")
+if (typeof inputDate === 'undefined') throw Error("must provide a start date")
 const inputTz = process.argv[3]
-if (inputTz === undefined) throw Error("must provide a meeting timezone")
+if (typeof inputTz === 'undefined') throw Error("must provide a meeting timezone")
+const inputMeetingType = process.argv[4]
+if (typeof inputMeetingType === 'undefined') throw Error("must provide a meeting type")
 const startDate = Temporal.PlainDate.from(inputDate)
 const timeZone = Temporal.TimeZone.from(inputTz)
-const days = 4
+let days;
+let isHybridMeeting = false;
+
+switch (inputMeetingType) {
+    case "hybrid":
+        days = 3;
+        isHybridMeeting = true;
+        break;
+    case "virtual":
+        days = 4;
+        break;
+    default:
+        throw new TypeError(`invalid meeting type: '${inputMeetingType}'. valid meeting types: ['hybrid', 'virtual']`)
+}
 
 const showTimeZones = [
     // CLDR abbreviations are locale specific so we need to provide different locales for the desired short TZ names
@@ -33,6 +48,7 @@ const baseTime = startDate.toZonedDateTime({
 
 function spans(time, tz) {
     time = time.withTimeZone(Temporal.TimeZone.from(tz))
+
     return {
         am: [time, time.add({ hours: 2 })],
         pm1: [time.add({ hours: 3 }), time.add({ hours: 5 })],
@@ -63,7 +79,10 @@ for (let i = 0; i < days; i++) {
         const zoneSpans = spans(current, z)
         amText.push(formatSpan(zoneSpans.am, l))
         pm1Text.push(formatSpan(zoneSpans.pm1, l))
-        pm2Text.push(formatSpan(zoneSpans.pm2, l))
+
+        if(isHybridMeeting) {
+            pm2Text.push(formatSpan(zoneSpans.pm2, l))
+        }
     }
 
     timeRow.push(
