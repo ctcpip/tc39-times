@@ -5,7 +5,7 @@
 You can run the tool on any computer with `npm` installed by running the following command
 
 ```sh
-npx git+https://git.disroot.org/ryzokuken/tc39-times.git <date> <timezone>
+npx github:ctcpip/tc39-times <date> <timezone> <virtual|hybrid>
 ```
 
 ### Local Usage
@@ -13,13 +13,13 @@ npx git+https://git.disroot.org/ryzokuken/tc39-times.git <date> <timezone>
 If you have a local checkout of the script on your computer, you can run it by executing the following in the project directory
 
 ```sh
-node index.mjs <date> <timezone>
+node index.mjs <date> <timezone> <virtual|hybrid>
 ```
 
 ### Example
 
 ```sh
-node index.mjs 2023-09-26 Asia/Tokyo
+node index.mjs 2023-09-26 Asia/Tokyo hybrid
 ```
 
 #### Example Output
